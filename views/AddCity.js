@@ -20,7 +20,7 @@ import global from '../styles/global';
 
 const AddCity = ({navigation, route}) => {
   const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
+  const [countryCode, setCountryCode] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
 
   const {setConsultAPI} = route.params;
@@ -28,13 +28,13 @@ const AddCity = ({navigation, route}) => {
   // Fn for add a city to the list
   const addCity = async () => {
     // Validation
-    if (city.trim() === '' || country.trim() === '') {
+    if (city.trim() === '' || countryCode.trim() === '') {
       setAlertVisible(true);
       return;
     }
 
     // Add city to the list
-    const listUpdated = {city, country};
+    const listUpdated = {city, countryCode};
 
     try {
       const url = 'http://10.0.2.2:3000/cityList';
@@ -67,8 +67,8 @@ const AddCity = ({navigation, route}) => {
         />
 
         <Picker
-          selectedValue={country}
-          onValueChange={itemValue => setCountry(itemValue)}>
+          selectedValue={countryCode}
+          onValueChange={itemValue => setCountryCode(itemValue)}>
           <Picker.Item label="- Select a Country -" value="" />
           <Picker.Item label="United States" value="US" />
           <Picker.Item label="Argentina" value="AR" />
