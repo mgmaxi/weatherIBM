@@ -31,7 +31,13 @@ const global = StyleSheet.create({
     bottom: '2.5%',
     backgroundColor: '#6c64fb',
   },
-  btnDeleteCity: {marginTop: 50, width: 170, alignSelf: 'center'},
+  btnGoMap: {
+    marginVertical: 10,
+    width: 170,
+    color: '#000',
+    alignSelf: 'center',
+  },
+  btnDeleteCity: {marginTop: 40, width: 170, alignSelf: 'center'},
   btnCancel: {marginRight: 10},
   btnDelete: {backgroundColor: 'red', color: 'black'},
 });

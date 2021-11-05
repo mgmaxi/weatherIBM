@@ -1,14 +1,3 @@
 {
-  "cityList": [
-    {
-      "city": "General Roca",
-      "country": "AR",
-      "id": 5
-    },
-    {
-      "city": "Buenos Aires",
-      "country": "AR",
-      "id": 6
-    }
-  ]
+  "cityList": []
 }
