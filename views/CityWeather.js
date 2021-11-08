@@ -67,7 +67,7 @@ const CityWeather = ({navigation, route}) => {
             </Paragraph>
           </View>
         ) : (
-          <CityWeatherCard cityWeather={cityWeather} />
+          <CityWeatherCard cityWeather={cityWeather} navigation={navigation} />
         )}
       </View>
 
