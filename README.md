@@ -11,6 +11,8 @@ This app fetch data from [Open WeatherMap](https://openweathermap.org/)
 
 - [React Native](https://reactnative.dev)
 - [React Navegation](https://reactnavigation.org/)
+- [React Native Paper](https://reactnativepaper.com/)
+- [React Native Maps](https://github.com/react-native-maps/react-native-maps)
 - [Picker](https://github.com/react-native-picker/picker)
 - [Axios](https://axios-http.com)
 - [Moment](https://momentjs.com/)
@@ -33,6 +35,10 @@ npm install
 ### ⚙️ <b>Run it</b>
 
 ```
+1) Start server:
+json-server --watch db.json
+
+2) Start app:
 Android: "npx react-native run-android"
 IOS: "npx react-native run-ios"
 ```

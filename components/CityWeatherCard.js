@@ -4,7 +4,7 @@ import {Button, Avatar, Card} from 'react-native-paper';
 import moment from 'moment';
 import global from '../styles/global';
 
-const CityWeatherCard = ({cityWeather}) => {
+const CityWeatherCard = ({navigation, cityWeather}) => {
   console.log(cityWeather);
   // Variables with data of weather from API OpenWeatherMap
   const {name: cityName, coord, main, timezone, weather} = cityWeather;
@@ -57,7 +57,11 @@ const CityWeatherCard = ({cityWeather}) => {
           </Text>
         </Card.Content>
         <Card.Cover source={{uri: 'https://picsum.photos/700'}} />
-        <Button icon="map" mode="contained" style={global.btnGoMap}>
+        <Button
+          onPress={() => navigation.navigate('Map', coord)}
+          icon="map"
+          mode="contained"
+          style={global.btnGoMap}>
           View on map
         </Button>
       </Card>
