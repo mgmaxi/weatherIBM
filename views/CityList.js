@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
+import {View, Alert, FlatList, StyleSheet} from 'react-native';
 import {FAB, List, Button, Headline, Paragraph} from 'react-native-paper';
 import axios from 'axios';
 import global from '../styles/global';
@@ -17,7 +17,7 @@ const CityList = ({navigation}) => {
         setCityList(result.data);
         setConsultAPI(false);
       } catch (error) {
-        console.log(error);
+        showAlert("Couldn't get the list of cities", error.message);
       }
     };
     if (consultAPI) {
@@ -25,9 +25,14 @@ const CityList = ({navigation}) => {
     }
   }, [consultAPI]);
 
-  //Fn for navigate to the form
+  //Fn for navigate to AddCity screen
   const goAddCity = () => {
     navigation.navigate('AddCity', {setConsultAPI});
+  };
+
+  // Alert
+  const showAlert = (title, message) => {
+    Alert.alert(title, message, [{text: 'OK'}]);
   };
 
   return (
@@ -43,14 +48,14 @@ const CityList = ({navigation}) => {
         onPress={() => goAddCity()}>
         Add a City
       </Button>
-
       <FlatList
         data={cityList}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <List.Item
-            title={item.city}
-            description={item.country}
+            title={item.cityName}
+            titleStyle={{fontWeight: 'bold'}}
+            description={item.countryCode}
             onPress={() =>
               navigation.navigate('CityWeather', {item, setConsultAPI})
             }
@@ -66,6 +71,13 @@ const CityList = ({navigation}) => {
 const styles = StyleSheet.create({
   btnGoAddCity: {
     marginTop: 10,
+  },
+  containerListItem: {
+    flexDirection: 'row',
+  },
+  temperature: {
+    marginLeft: 5,
+    paddingVertical: 5,
   },
 });
 

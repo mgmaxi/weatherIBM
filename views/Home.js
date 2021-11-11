@@ -5,7 +5,7 @@ import global from '../styles/global';
 const Home = () => {
   return (
     <View style={global.container}>
-      <Text>Desde Home</Text>
+      <Text style={global.title}>HOME</Text>
     </View>
   );
 };
