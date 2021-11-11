@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, Alert, StyleSheet} from 'react-native';
 import axios from 'axios';
 import WeatherMap from '../components/WeatherMap';
 
-const Map = () => {
+const Map = ({route}) => {
   const [cityList, setCityList] = useState([]);
 
   // Consult DB for get the list of cities
@@ -14,15 +14,24 @@ const Map = () => {
         const result = await axios.get(url);
         setCityList(result.data);
       } catch (error) {
-        console.log(error);
+        showAlert("Couldn't get the list of cities", error);
       }
     };
     getCityList();
   }, []);
 
+  // Alert
+  const showAlert = (title, message) => {
+    Alert.alert(title, message, [{text: 'OK'}]);
+  };
+
   return (
     <View style={styles.container}>
-      <WeatherMap cityList={cityList} />
+      {route.params ? (
+        <WeatherMap cityList={cityList} coord={route.params} />
+      ) : (
+        <WeatherMap cityList={cityList} />
+      )}
     </View>
   );
 };
