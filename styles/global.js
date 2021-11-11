@@ -32,14 +32,29 @@ const global = StyleSheet.create({
     backgroundColor: '#6c64fb',
   },
   btnGoMap: {
-    marginVertical: 10,
+    marginTop: 20,
     width: 170,
     color: '#000',
     alignSelf: 'center',
+    borderRadius: 25,
   },
-  btnDeleteCity: {marginTop: 40, width: 170, alignSelf: 'center'},
-  btnCancel: {marginRight: 10},
-  btnDelete: {backgroundColor: 'red', color: 'black'},
+  btnDeleteCity: {
+    position: 'absolute',
+    bottom: '2.5%',
+    width: 170,
+    alignSelf: 'center',
+    borderRadius: 25,
+    backgroundColor: '#d92405',
+  },
+  btnCancel: {
+    marginRight: 10,
+    paddingHorizontal: 5,
+    backgroundColor: '#ccc',
+  },
+  btnDelete: {
+    paddingHorizontal: 5,
+    backgroundColor: '#d92405',
+  },
 });
 
 export default global;

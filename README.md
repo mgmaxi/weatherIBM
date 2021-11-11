@@ -13,9 +13,10 @@ This app fetch data from [Open WeatherMap](https://openweathermap.org/)
 - [React Navegation](https://reactnavigation.org/)
 - [React Native Paper](https://reactnativepaper.com/)
 - [React Native Maps](https://github.com/react-native-maps/react-native-maps)
-- [Picker](https://github.com/react-native-picker/picker)
+- [React Native Country Picker Modal](https://github.com/xcarpentier/react-native-country-picker-modal)
 - [Axios](https://axios-http.com)
 - [Moment](https://momentjs.com/)
+- [JSON Server](https://github.com/typicode/json-server)
 - [API: Open WeatherMap](https://openweathermap.org/)
 
 ## 📷 <b> Preview </b>

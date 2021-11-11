@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {LogBox} from 'react-native';
 import {Provider as PaperProvider} from 'react-native-paper';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -46,10 +46,18 @@ const WeatherStackScreen = () => {
   );
 };
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: '#93BAF2',
+  },
+};
+
 const App = () => {
   return (
     <PaperProvider>
-      <NavigationContainer>
+      <NavigationContainer theme={theme}>
         <Tab.Navigator
           initialRouteName="Home"
           inactiveColor="#3e2465"
