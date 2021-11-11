@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import {
   FAB,
   Title,
+  Alert,
   Portal,
   Dialog,
   Button,
@@ -15,7 +16,7 @@ import CityWeatherCard from '../components/CityWeatherCard';
 const CityWeather = ({navigation, route}) => {
   const {setConsultAPI} = route.params;
   // Variables from DB list
-  const {city, countryCode, id} = route.params.item;
+  const {id, cityName, countryCode} = route.params.item;
   // Variable with data of weather from API OpenWeatherMap
   const [cityWeather, setCityWeather] = useState({});
   // Alert setting
@@ -26,11 +27,11 @@ const CityWeather = ({navigation, route}) => {
     const getCityWeather = async () => {
       try {
         const APIkey = '9ce6fc357f002e0fdb6ef7e8411a0c08';
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${APIkey}`;
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${APIkey}`;
         const result = await axios.get(url);
         setCityWeather(result.data);
       } catch (error) {
-        console.log(error);
+        showAlert(error, "Couldn't get the weather of the city.");
       }
     };
     getCityWeather();
@@ -46,7 +47,8 @@ const CityWeather = ({navigation, route}) => {
       const url = `http://10.0.2.2:3000/cityList/${id}`;
       await axios.delete(url);
     } catch (error) {
-      console.log(error);
+      //alerta
+      showAlert(error, "Couldn't delete the city from the list.");
     }
 
     // Redirect
@@ -56,25 +58,29 @@ const CityWeather = ({navigation, route}) => {
     setConsultAPI(true);
   };
 
+  // Alert
+  const showAlert = (title, message) => {
+    Alert.alert(title, message, [{text: 'OK'}]);
+  };
+
   return (
     <View style={global.container}>
       <View>
         {Object.keys(cityWeather).length === 0 ? (
           <View>
-            <Title>Geting weather from {city}!</Title>
+            <Title>Geting weather from {cityName}!</Title>
             <Paragraph>
-              Remember to select a real country and city name.
+              Remember it must be a valid city name and country.
             </Paragraph>
           </View>
         ) : (
           <CityWeatherCard cityWeather={cityWeather} navigation={navigation} />
         )}
       </View>
-
       <Button
         icon="delete"
         mode="contained"
-        color="red"
+        color="#FF0000"
         style={global.btnDeleteCity}
         onPress={() => setAlertVisible(true)}>
         Delete city
@@ -87,7 +93,7 @@ const CityWeather = ({navigation, route}) => {
       />
       <Portal>
         <Dialog visible={alertVisible} onDismiss={() => setAlertVisible(false)}>
-          <Dialog.Title>DELETE CITY</Dialog.Title>
+          <Dialog.Title>Delete City</Dialog.Title>
           <Dialog.Content>
             <Paragraph>
               Do you want to delete this city from your list?
@@ -98,13 +104,13 @@ const CityWeather = ({navigation, route}) => {
               color="#000"
               style={global.btnCancel}
               onPress={() => setAlertVisible(false)}>
-              CANCEL
+              Cancel
             </Button>
             <Button
               color="#FFF"
               style={global.btnDelete}
               onPress={() => deleteCity(id)}>
-              DELETE
+              Delete
             </Button>
           </Dialog.Actions>
         </Dialog>
