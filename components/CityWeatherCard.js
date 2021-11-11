@@ -5,7 +5,6 @@ import moment from 'moment';
 import global from '../styles/global';
 
 const CityWeatherCard = ({navigation, cityWeather}) => {
-  console.log(cityWeather);
   // Variables with data of weather from API OpenWeatherMap
   const {name: cityName, coord, main, timezone, weather} = cityWeather;
   const {temp, temp_min, temp_max} = main;

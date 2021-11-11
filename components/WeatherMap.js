@@ -2,30 +2,30 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import MapView, {Callout, Marker} from 'react-native-maps';
 
-const WeatherMap = ({cityList}) => {
+const WeatherMap = ({cityList, coord}) => {
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
         region={{
-          latitude: -38.416097,
-          longitude: -63.616672,
-          latitudeDelta: 50,
-          longitudeDelta: 50,
+          latitude: coord ? coord.lat : -80,
+          longitude: coord ? coord.lon : -60,
+          latitudeDelta: coord ? 5 : 75,
+          longitudeDelta: coord ? 5 : 75,
         }}>
         {cityList.map(data => (
           <Marker
             key={data.id}
             coordinate={{
-              latitude: data.lat,
-              longitude: data.lon,
+              latitude: data.coord.lat,
+              longitude: data.coord.lon,
             }}
             image={require('../assets/weatherMark.png')}>
             <Callout tooltip>
               <View>
                 <View style={styles.containerMarker}>
-                  <Text style={styles.markerTitle}>{data.city}</Text>
-                  <Text style={styles.markerSubTitle}>temperature</Text>
+                  <Text style={styles.markerTitle}>{data.cityName}</Text>
+                  <Text style={styles.markerSubTitle}>{data.countryCode}</Text>
                 </View>
                 <View style={styles.markerArrowBorder} />
                 <View style={styles.markerArrow} />
