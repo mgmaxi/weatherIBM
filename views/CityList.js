@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
+import {View, Text, Image, Alert, FlatList, StyleSheet} from 'react-native';
 import {FAB, List, Button, Headline, Paragraph} from 'react-native-paper';
 import axios from 'axios';
 import global from '../styles/global';
@@ -17,7 +17,7 @@ const CityList = ({navigation}) => {
         setCityList(result.data);
         setConsultAPI(false);
       } catch (error) {
-        console.log(error);
+        showAlert("Couldn't get the list of cities", error.message);
       }
     };
     if (consultAPI) {
@@ -25,10 +25,18 @@ const CityList = ({navigation}) => {
     }
   }, [consultAPI]);
 
-  //Fn for navigate to the form
+  //Fn for navigate to AddCity screen
   const goAddCity = () => {
     navigation.navigate('AddCity', {setConsultAPI});
   };
+
+  // Alert
+  const showAlert = (title, message) => {
+    Alert.alert(title, message, [{text: 'OK'}]);
+  };
+
+  // Kelvin temperature
+  const kelvin = 273.15;
 
   return (
     <View style={global.container}>
@@ -43,14 +51,27 @@ const CityList = ({navigation}) => {
         onPress={() => goAddCity()}>
         Add a City
       </Button>
-
       <FlatList
         data={cityList}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <List.Item
-            title={item.city}
-            description={item.country}
+            title={item.cityName}
+            titleStyle={{fontWeight: 'bold'}}
+            description={item.countryCode}
+            /* description={
+              <View style={styles.containerListItem}>
+                <Image
+                  source={{
+                    uri: `http://openweathermap.org/img/w/${item.icon}.png`,
+                  }}
+                  style={{width: 33, height: 33}}
+                />
+                <Text style={styles.temperature}>
+                  {parseInt(item.temperature - kelvin)} &#x2103;
+                </Text>
+              </View>
+            } */
             onPress={() =>
               navigation.navigate('CityWeather', {item, setConsultAPI})
             }
@@ -66,6 +87,13 @@ const CityList = ({navigation}) => {
 const styles = StyleSheet.create({
   btnGoAddCity: {
     marginTop: 10,
+  },
+  containerListItem: {
+    flexDirection: 'row',
+  },
+  temperature: {
+    paddingVertical: 5,
+    marginLeft: 5,
   },
 });
 
