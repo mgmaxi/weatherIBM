@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, Alert, FlatList, StyleSheet} from 'react-native';
+import {View, Alert, FlatList, StyleSheet} from 'react-native';
 import {FAB, List, Button, Headline, Paragraph} from 'react-native-paper';
 import axios from 'axios';
 import global from '../styles/global';
@@ -35,9 +35,6 @@ const CityList = ({navigation}) => {
     Alert.alert(title, message, [{text: 'OK'}]);
   };
 
-  // Kelvin temperature
-  const kelvin = 273.15;
-
   return (
     <View style={global.container}>
       <Headline style={global.title}>City List</Headline>
@@ -59,19 +56,6 @@ const CityList = ({navigation}) => {
             title={item.cityName}
             titleStyle={{fontWeight: 'bold'}}
             description={item.countryCode}
-            /* description={
-              <View style={styles.containerListItem}>
-                <Image
-                  source={{
-                    uri: `http://openweathermap.org/img/w/${item.icon}.png`,
-                  }}
-                  style={{width: 33, height: 33}}
-                />
-                <Text style={styles.temperature}>
-                  {parseInt(item.temperature - kelvin)} &#x2103;
-                </Text>
-              </View>
-            } */
             onPress={() =>
               navigation.navigate('CityWeather', {item, setConsultAPI})
             }
@@ -92,8 +76,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   temperature: {
-    paddingVertical: 5,
     marginLeft: 5,
+    paddingVertical: 5,
   },
 });
 
