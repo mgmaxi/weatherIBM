@@ -1,6 +1,6 @@
-import React from 'react';
-import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
-import {Card, Button, Avatar} from 'react-native-paper';
+import * as React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {Button, Avatar, Card} from 'react-native-paper';
 import moment from 'moment';
 import global from '../styles/global';
 
@@ -8,23 +8,22 @@ const CityWeatherCard = ({navigation, cityWeather}) => {
   // Variables with data of weather from API OpenWeatherMap
   const {name: cityName, coord, main, timezone, weather} = cityWeather;
   const {temp, temp_min, temp_max} = main;
-  const {main: weatherDescription, icon} = weather[0];
+  const {description, icon} = weather[0];
 
   const kelvin = 273.15;
   const celciusTemp = parseInt(temp - kelvin);
   const minTemp = parseInt(temp_min - kelvin);
   const maxTemp = parseInt(temp_max - kelvin);
 
-  // Card city icon
+  // Weather Icon
   const LeftContent = props => (
-    <Avatar.Icon
-      style={{
-        backgroundColor: '#FFF',
-        borderWidth: 0.5,
+    <Avatar.Image
+      {...props}
+      style={styles.icon}
+      size={48}
+      source={{
+        uri: `http://openweathermap.org/img/w/${icon}.png`,
       }}
-      size={38}
-      icon="city"
-      color="#000"
     />
   );
 
@@ -38,59 +37,32 @@ const CityWeatherCard = ({navigation, cityWeather}) => {
 
   return (
     <View>
-      <Card style={styles.card} elevation={20}>
-        <ImageBackground
-          style={styles.bgImage}
-          source={require('../assets/day.jpg')}
-          resizeMode="cover">
-          <Card.Title
-            style={styles.title}
-            title={cityName}
-            titleStyle={{fontWeight: 'bold', color: '#FFF'}}
-            subtitle={
-              <Text>
-                <Image
-                  style={{height: 20, width: 20}}
-                  source={{
-                    uri: `http://openweathermap.org/img/w/${icon}.png`,
-                  }}
-                />
-                {weatherDescription}
-              </Text>
-            }
-            subtitleStyle={{color: '#FFF'}}
-            left={LeftContent}
-          />
-          <Card.Content>
-            <View style={styles.containerContentCard}>
-              <View style={styles.containerIcon}>
-                <Image
-                  style={{height: 63, width: 71}}
-                  source={{
-                    uri: `http://openweathermap.org/img/w/${icon}.png`,
-                  }}
-                />
-              </View>
-              <View style={styles.containerTemperature}>
-                <Text style={styles.temperature}>{celciusTemp}</Text>
-              </View>
-              <View style={styles.containerCelcius}>
-                <Text style={styles.celcius}>&#x2103;</Text>
-              </View>
+      <Card elevation={20}>
+        <Card.Title
+          title={cityName}
+          subtitle={description}
+          left={LeftContent}
+        />
+        <Card.Content style={styles.containerCard}>
+          <Text style={styles.temperature}>
+            {celciusTemp}
+            <View style={styles.containerCelcius}>
+              <Text style={styles.celcius}>&#x2103;</Text>
             </View>
-            <Text style={styles.time}>{getCityTime('h:mm A')}</Text>
-            <Text style={styles.tempMaxMin}>
-              Max {maxTemp} &#x2103; Min {minTemp} &#x2103;
-            </Text>
-            <Button
-              onPress={() => navigation.navigate('Map', coord)}
-              icon="map"
-              mode="contained"
-              style={global.btnGoMap}>
-              View on map
-            </Button>
-          </Card.Content>
-        </ImageBackground>
+          </Text>
+          <Text style={styles.time}>{getCityTime('h:mm A')}</Text>
+          <Text style={styles.tempMaxMin}>
+            Max {maxTemp} &#x2103; Min {minTemp} &#x2103;
+          </Text>
+        </Card.Content>
+        <Card.Cover source={{uri: 'https://picsum.photos/700'}} />
+        <Button
+          onPress={() => navigation.navigate('Map', coord)}
+          icon="map"
+          mode="contained"
+          style={global.btnGoMap}>
+          View on map
+        </Button>
       </Card>
     </View>
   );
@@ -99,72 +71,33 @@ const CityWeatherCard = ({navigation, cityWeather}) => {
 export default CityWeatherCard;
 
 const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    justifyContent: 'center',
-    minHeight: 500,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
-    overflow: 'hidden',
-  },
-  bgImage: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  title: {
-    position: 'absolute',
-    top: 0,
-    borderBottomWidth: 1,
-    backgroundColor: '#000',
-    opacity: 0.75,
-  },
-  containerContentCard: {
-    flexDirection: 'row',
+  containerCard: {
     alignItems: 'center',
   },
-  containerIcon: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  containerTemperature: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  containerCelcius: {
-    flex: 1,
-    alignSelf: 'flex-start',
+  icon: {
+    backgroundColor: 'transparent',
   },
   temperature: {
+    width: '100%',
     color: '#FFF',
-    fontSize: 92,
+    fontSize: 62,
     fontWeight: 'bold',
+    textAlign: 'center',
     textShadowColor: '#000',
     textShadowOffset: {width: 2, height: 2},
-    textShadowRadius: 10,
+    textShadowRadius: 20,
+  },
+  containerCelcius: {
+    paddingBottom: 20,
   },
   celcius: {
-    paddingTop: 20,
     color: '#FFF',
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: 'bold',
     textShadowColor: '#000',
     textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 5,
   },
-  time: {color: '#FFF', textAlign: 'center', fontSize: 18},
-  tempMaxMin: {
-    marginTop: 10,
-    color: '#FFF',
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    textShadowColor: '#000',
-    textShadowOffset: {width: 0.5, height: 0.5},
-    textShadowRadius: 5,
-  },
+  time: {fontSize: 16},
+  tempMaxMin: {marginVertical: 10, color: '#000', fontSize: 22},
 });
