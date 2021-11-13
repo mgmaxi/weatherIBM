@@ -1,14 +1,14 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
 import {Card, Button, Avatar} from 'react-native-paper';
-import moment from 'moment';
 import global from '../styles/global';
 
-const CityWeatherCard = ({navigation, cityWeather}) => {
+const CityWeatherCard = ({navigation, cityWeather, dayOrNight}) => {
   // Variables with data of weather from API OpenWeatherMap
-  const {name: cityName, coord, main, timezone, weather} = cityWeather;
+  const {name: cityName, coord, main, weather} = cityWeather;
   const {temp, temp_min, temp_max} = main;
   const {main: weatherDescription, icon} = weather[0];
+  const {currentCityTime, urlBgImage} = dayOrNight;
 
   const kelvin = 273.15;
   const celciusTemp = parseInt(temp - kelvin);
@@ -28,20 +28,12 @@ const CityWeatherCard = ({navigation, cityWeather}) => {
     />
   );
 
-  // Get time of a city
-  const getCityTime = format => {
-    const currentCityTime = moment()
-      .utcOffset(timezone / 60)
-      .format(format);
-    return currentCityTime;
-  };
-
   return (
     <View>
       <Card style={styles.card} elevation={20}>
         <ImageBackground
           style={styles.bgImage}
-          source={require('../assets/day.jpg')}
+          source={{uri: urlBgImage}}
           resizeMode="cover">
           <Card.Title
             style={styles.title}
@@ -78,7 +70,7 @@ const CityWeatherCard = ({navigation, cityWeather}) => {
                 <Text style={styles.celcius}>&#x2103;</Text>
               </View>
             </View>
-            <Text style={styles.time}>{getCityTime('h:mm A')}</Text>
+            <Text style={styles.time}>{currentCityTime}</Text>
             <Text style={styles.tempMaxMin}>
               Max {maxTemp} &#x2103; Min {minTemp} &#x2103;
             </Text>

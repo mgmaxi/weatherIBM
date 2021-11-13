@@ -10,6 +10,7 @@ import {
   Paragraph,
 } from 'react-native-paper';
 import axios from 'axios';
+import moment from 'moment';
 import global from '../styles/global';
 import CityWeatherCard from '../components/CityWeatherCard';
 
@@ -21,6 +22,10 @@ const CityWeather = ({navigation, route}) => {
   const [cityWeather, setCityWeather] = useState({});
   // Alert setting
   const [alertVisible, setAlertVisible] = useState(false);
+  // Settings for day or night
+  const [dayOrNight, setDayOrNight] = useState({
+    urlBgImage: 'https://i.ibb.co/QjKZkSf/day.jpg',
+  });
 
   // Fn get City Weather from API OpenWeatherMap
   useEffect(() => {
@@ -30,6 +35,32 @@ const CityWeather = ({navigation, route}) => {
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${APIkey}`;
         const result = await axios.get(url);
         setCityWeather(result.data);
+
+        const {timezone} = result.data;
+
+        // Get time of a city
+        const getCityTime = format => {
+          const currentCityTime = moment()
+            .utcOffset(timezone / 60)
+            .format(format);
+          return currentCityTime;
+        };
+
+        // Fn for change bgImage according to the time
+        const time = getCityTime('h:mm A');
+        const hour = getCityTime('HH');
+
+        if (hour >= 8 && hour <= 20) {
+          setDayOrNight({
+            urlBgImage: 'https://i.ibb.co/QjKZkSf/day.jpg',
+            currentCityTime: time,
+          });
+        } else {
+          setDayOrNight({
+            urlBgImage: 'https://i.ibb.co/ydNTLT6/night.jpg',
+            currentCityTime: time,
+          });
+        }
       } catch (error) {
         showAlert(error, "Couldn't get the weather of the city.");
       }
@@ -74,7 +105,11 @@ const CityWeather = ({navigation, route}) => {
             </Paragraph>
           </View>
         ) : (
-          <CityWeatherCard cityWeather={cityWeather} navigation={navigation} />
+          <CityWeatherCard
+            cityWeather={cityWeather}
+            navigation={navigation}
+            dayOrNight={dayOrNight}
+          />
         )}
       </View>
       <Button
