@@ -118,6 +118,22 @@ const AboutUs = () => {
               )}
             />
             <List.Item
+              title="React Native Vector Icons"
+              onPress={() =>
+                Linking.openURL(
+                  'https://github.com/oblador/react-native-vector-icons',
+                )
+              }
+              left={props => (
+                <List.Icon
+                  {...props}
+                  icon="react"
+                  color="#5ed3f3"
+                  style={styles.iconTechnologies}
+                />
+              )}
+            />
+            <List.Item
               title="Axios"
               onPress={() => Linking.openURL('https://axios-http.com/')}
               left={props => (

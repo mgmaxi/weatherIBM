@@ -74,8 +74,8 @@ const Home = ({navigation}) => {
             <Subheading style={global.subTitle}>Use</Subheading>
             <Paragraph style={styles.description}>
               In this application you can add cities to a list, get their
-              current weather, min/max temperature, time and view them in the
-              map. This app fetch the weather data from OpenWeatherMap.
+              current weather, min/max temperature, the time and view them in
+              the map. This app fetch the weather data from OpenWeatherMap.
             </Paragraph>
           </Dialog.Content>
           <Dialog.Actions>

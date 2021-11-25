@@ -17,7 +17,7 @@ const CityList = ({navigation}) => {
         setCityList(result.data);
         setConsultAPI(false);
       } catch (error) {
-        showAlert("Couldn't get the list of cities", error.message);
+        showAlert(error.message, "Couldn't get the list of cities");
       }
     };
     if (consultAPI) {
