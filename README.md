@@ -26,7 +26,12 @@ This application fetch data from [Open WeatherMap](https://openweathermap.org/).
 
 ## 📷 <b> Preview </b>
 
-<img src="assets/preview/previewProject.gif">
+<img src="assets/preview/preview1.jpg">
+<img src="assets/preview/preview2.jpg">
+<img src="assets/preview/preview3.jpg">
+<img src="assets/preview/preview4.jpg">
+<img src="assets/preview/preview5.jpg">
+<img src="assets/preview/preview6.jpg">
 
 ## 🚀 <b> Setup / Launch</b>
 
