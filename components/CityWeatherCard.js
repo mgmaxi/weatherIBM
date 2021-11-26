@@ -3,7 +3,12 @@ import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
 import {Card, Button, Avatar} from 'react-native-paper';
 import global from '../styles/global';
 
-const CityWeatherCard = ({navigation, cityWeather, dayOrNight}) => {
+const CityWeatherCard = ({
+  navigation,
+  cityWeather,
+  dayOrNight,
+  setAlertVisible,
+}) => {
   // Variables with data of weather from API OpenWeatherMap
   const {name: cityName, coord, main, weather} = cityWeather;
   const {temp, temp_min, temp_max} = main;
@@ -74,16 +79,33 @@ const CityWeatherCard = ({navigation, cityWeather, dayOrNight}) => {
             <Text style={styles.tempMaxMin}>
               Max {maxTemp} &#x2103; Min {minTemp} &#x2103;
             </Text>
-            <Button
-              onPress={() => navigation.navigate('Map', coord)}
-              icon="map"
-              mode="contained"
-              style={global.btnGoMap}>
-              View on map
-            </Button>
           </Card.Content>
         </ImageBackground>
       </Card>
+      <View style={styles.containerBtn}>
+        <Button
+          onPress={() => navigation.navigate('Map', coord)}
+          icon="map"
+          mode="contained"
+          style={global.btnGoMap}>
+          Map
+        </Button>
+        <Button
+          icon="delete"
+          mode="contained"
+          color="#FF0000"
+          style={global.btnDeleteCity}
+          onPress={() => setAlertVisible(true)}>
+          Delete
+        </Button>
+        <Button
+          onPress={() => navigation.goBack()}
+          icon="arrow-left"
+          mode="contained"
+          style={global.btnGoBack}>
+          Back
+        </Button>
+      </View>
     </View>
   );
 };
@@ -92,9 +114,10 @@ export default CityWeatherCard;
 
 const styles = StyleSheet.create({
   card: {
+    elevation: 1,
     flex: 1,
     justifyContent: 'center',
-    minHeight: 500,
+    minHeight: 565,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,
@@ -158,5 +181,10 @@ const styles = StyleSheet.create({
     textShadowColor: '#000',
     textShadowOffset: {width: 0.5, height: 0.5},
     textShadowRadius: 5,
+  },
+  containerBtn: {
+    elevation: 3,
+    position: 'relative',
+    bottom: 15,
   },
 });

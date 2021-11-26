@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
 import {
-  FAB,
   Title,
   Alert,
   Portal,
@@ -109,23 +108,10 @@ const CityWeather = ({navigation, route}) => {
             cityWeather={cityWeather}
             navigation={navigation}
             dayOrNight={dayOrNight}
+            setAlertVisible={setAlertVisible}
           />
         )}
       </View>
-      <Button
-        icon="delete"
-        mode="contained"
-        color="#FF0000"
-        style={global.btnDeleteCity}
-        onPress={() => setAlertVisible(true)}>
-        Delete city
-      </Button>
-      <FAB
-        style={global.fab}
-        small
-        icon="arrow-left"
-        onPress={() => navigation.goBack()}
-      />
       <Portal>
         <Dialog visible={alertVisible} onDismiss={() => setAlertVisible(false)}>
           <Dialog.Title>Delete City</Dialog.Title>

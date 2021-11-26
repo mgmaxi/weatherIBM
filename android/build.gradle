@@ -7,6 +7,7 @@ buildscript {
         compileSdkVersion = 30
         targetSdkVersion = 30
         ndkVersion = "21.4.7075529"
+        // Build configuration for GoogleMaps
         supportLibVersion   = "28.0.3"
         playServicesVersion = "17.0.0"
         androidMapsUtilsVersion = "2.3.0"
