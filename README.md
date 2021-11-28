@@ -24,6 +24,16 @@ This application fetch data from [Open WeatherMap](https://openweathermap.org/).
 - [JSON Server](https://github.com/typicode/json-server)
 - [API: Open WeatherMap](https://openweathermap.org/)
 
+## 📖 <b> Paper Protoype </b>
+
+[Paper prototyping Version 1](docs/PaperPrototypingV1.jpeg)
+[Paper prototyping Version 2: Home and About Us](docs/PaperPrototypingHomeAboutUs.jpg)
+[Paper prototyping Version 2: Weather](docs/PaperPrototypingWeather.jpg)
+
+## 📖 <b> Persona Canvas </b>
+
+<img src="docs/PersonaCanvas.jpg" width="800" height="450">
+
 ## 📷 <b> Preview </b>
 
 <img src="assets/preview/preview1.jpg"><img src="assets/preview/preview2.jpg">
@@ -58,9 +68,9 @@ android:value="API_KEY"
 ### ⚙️ <b>Run it</b>
 
 ```
-1) Start server:
+1) In one terminal start the server:
 json-server --watch db.json
 
-2) Start app:
+2) In another terminal start the app:
 Android: "npx react-native run-android"
 ```
