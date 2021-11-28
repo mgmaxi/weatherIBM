@@ -24,13 +24,13 @@ This application fetch data from [Open WeatherMap](https://openweathermap.org/).
 - [JSON Server](https://github.com/typicode/json-server)
 - [API: Open WeatherMap](https://openweathermap.org/)
 
-## 📖 <b> Paper Protoype </b>
+## 📃 <b> Paper Protoype </b>
 
-[Paper prototyping Version 1](docs/PaperPrototypingV1.jpeg)
-[Paper prototyping Version 2: Home and About Us](docs/PaperPrototypingHomeAboutUs.jpg)
-[Paper prototyping Version 2: Weather](docs/PaperPrototypingWeather.jpg)
+- [Paper prototyping Version 1](docs/PaperPrototypingV1.jpeg)
+- [Paper prototyping Version 2: Home and About Us](docs/PaperPrototypingHomeAboutUs.jpg)
+- [Paper prototyping Version 2: Weather](docs/PaperPrototypingWeather.jpg)
 
-## 📖 <b> Persona Canvas </b>
+## 📝 <b> Persona Canvas </b>
 
 <img src="docs/PersonaCanvas.jpg" width="800" height="450">
 
